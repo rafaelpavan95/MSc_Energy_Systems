@@ -10,4 +10,4 @@ Nesta pasta, encontram-se trabalhos desenvolvidos na disciplina de Qualidade de 
 - Distorção Harmônica;
 - Normatização Nacional e Internacional;
 - Simulação Computacional (Simulink/MATLAB);
-- Programação Matemática (Transformadas);
+- Programação Matemática (Transformadas).
