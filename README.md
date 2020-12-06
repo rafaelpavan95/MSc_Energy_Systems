@@ -1,5 +1,7 @@
 # MSc_Energy_Systems
 
+Neste repositório, encotram-se as atividades desenvolvidas nas disciplinas cursadas durante o Mestrado em Otimização de Sistemas de Energia.
+
 ## Power_Quality
 Nesta pasta, encontram-se trabalhos desenvolvidos na disciplina de Qualidade de Energia Elétrica. Dentre os assuntos estudados, estão: 
 
