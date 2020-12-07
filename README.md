@@ -18,16 +18,7 @@ Nesta pasta, encontram-se trabalhos desenvolvidos na disciplina de Qualidade de 
 ## Power_Flow
 Nesta pasta, encontram-se trabalhos desenvolvidos na disciplina de Despacho e Pré-Despacho de Geração. Dentre os assuntos estudados, estão: 
 
-- Fluxo de Potência;
-- Sistemas Elétricos de Potência;
-- Otimização;
-- Condições de KKT;
-- Distorção Harmônica;
-- Normatização Nacional e Internacional;
-- Simulação Computacional (Simulink/MATLAB);
-- Programação Matemática (Transformadas).
-
-Operação Econômica de Sistemas de Energia;
+- Operação Econômica de Sistemas de Energia;
 - Modelos de Fluxo de Potência e Técnicas de Solução; 
 - Problemas de Otimização; 
 - Conceito de Algoritmos em Otimização; 
