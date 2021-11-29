@@ -147,9 +147,10 @@ def inicializa_sep(sep, algorithm, relatorio=False):
                 
     if len(sep.bus)==118:
         
-        sep.bus['min_vm_pu'] = 0.95
-        sep.bus['max_vm_pu'] = 1.05
-#         sep.ext_grid['vm_pu'] = 1.05
+        sep.bus['min_vm_pu'] = 0.94
+        sep.bus['max_vm_pu'] = 1.06
+#         sep.ext_grid['max_vm_pu'] = 1.05
+
         
         if algorithm == 'nr':
         
@@ -177,8 +178,8 @@ def inicializa_sep(sep, algorithm, relatorio=False):
                     
     if len(sep.bus)==300:
         
-        sep.bus['min_vm_pu'] = 0.94
-        sep.bus['max_vm_pu'] = 1.06
+        sep.bus['min_vm_pu'] = 0.9
+        sep.bus['max_vm_pu'] = 1.1
 
     
         if algorithm == 'nr':
@@ -604,7 +605,7 @@ def pen_tensao(vbus, limite_sup, limite_inf,relatorio=True):
     
     inferior = vbus - limite_inf
     superior = limite_sup - vbus
-    penalizacao = np.sum(np.power(superior[superior<0],2))+np.sum(np.power(inferior[inferior<0],2))
+    penalizacao = np.sum(np.abs(superior[superior<0]))+np.sum(np.abs(inferior[inferior<0]))
     
     if relatorio == True:
         
@@ -658,8 +659,8 @@ def pen_ger_reativo(q, limite_sup, limite_inf,sep,relatorio=True):
     inferiorext = ext_inf - qext
     superiorext =  ext_sup - qext
     
-    penalizacaoext = np.sum(np.power(superiorext[superiorext<0],2))+np.sum(np.power(inferiorext[inferiorext>0],2))
-    penalizacao = np.sum(np.power(superior[superior<0],2))+np.sum(np.power(inferior[inferior>0],2))
+    penalizacaoext = np.sum(np.abs(superiorext[superiorext<0]))+np.sum(np.abs(inferiorext[inferiorext>0]))
+    penalizacao = np.sum(np.abs(superior[superior<0]))+np.sum(np.abs(inferior[inferior>0]))
     
     
     if relatorio == True:
@@ -749,7 +750,7 @@ def coleta_dados_trafo(sep, relatorio=True):
     if len(sep.bus)==118:
         
         step = 0.01
-        valores_taps = np.arange(start = 0.95, stop = 1.05, step = step)
+        valores_taps = np.arange(start = 0.9, stop = 1.1, step = step)
            
                     
     if len(sep.bus)==300:
@@ -876,7 +877,7 @@ def coleta_dados_bshunt(sep):
 
     ''' 
     
-    ieee14 = np.arange(0.00,0.45,0.001)
+    ieee118 = np.arange(0.00,0.45,0.001)
     ieee30 = np.arange(0.00,0.35,0.001)
     ieee300 = np.arange(start=-3.25,stop=3.25,step=0.1)
     
@@ -886,45 +887,45 @@ def coleta_dados_bshunt(sep):
     
     if len(sep.bus)==14:
         
-        bsh = np.array([[0,0.19,0.34,0.39]],dtype=object)
+        bsh = np.array([[0,0.01, 0.02, 0.03, 0.04, 0.05]],dtype=object)
         
         
     if len(sep.bus)==30:
         
-        bsh = np.array([[0,0.19,0.34,0.39],[0, 0.05, 0.09]],dtype=object)
+        bsh = np.array([[0,0.01, 0.02, 0.03, 0.04, 0.05],[0,0.01, 0.02, 0.03, 0.04, 0.05]],dtype=object)
         
                 
     if len(sep.bus)==118:
         
-#         bsh = np.array([np.arange(start=-0.40, stop=0,step=0.01), 
-#                        np.arange(start=0, stop=0.14,step=0.01), 
-#                        np.arange(start=-0.25, stop=0,step=0.01), 
-#                        np.arange(start=0, stop=0.1,step=0.01), 
-#                        np.arange(start=0, stop=0.1,step=0.01),
-#                        np.arange(start=0, stop=0.1,step=0.01),
-#                        np.arange(start=0, stop=0.15,step=0.01),
-#                        np.arange(start=0, stop=0.12,step=0.01),                       
-#                        np.arange(start=0, stop=0.2,step=0.01),
-#                        np.arange(start=0, stop=0.2,step=0.01),
-#                        np.arange(start=0, stop=0.1,step=0.01),
-#                        np.arange(start=0, stop=0.2,step=0.01),
-#                        np.arange(start=0, stop=0.06,step=0.01),
-#                        np.arange(start=0, stop=0.06,step=0.01)],dtype=object)
+        bsh = np.array([np.arange(start=-0.40, stop=0,step=0.01), 
+                       np.arange(start=0, stop=0.14,step=0.01), 
+                       np.arange(start=-0.25, stop=0,step=0.01), 
+                       np.arange(start=0, stop=0.1,step=0.01), 
+                       np.arange(start=0, stop=0.1,step=0.01),
+                       np.arange(start=0, stop=0.1,step=0.01),
+                       np.arange(start=0, stop=0.15,step=0.01),
+                       np.arange(start=0, stop=0.12,step=0.01),                       
+                       np.arange(start=0, stop=0.2,step=0.01),
+                       np.arange(start=0, stop=0.2,step=0.01),
+                       np.arange(start=0, stop=0.1,step=0.01),
+                       np.arange(start=0, stop=0.2,step=0.01),
+                       np.arange(start=0, stop=0.06,step=0.01),
+                       np.arange(start=0, stop=0.06,step=0.01)],dtype=object)
 
-        bsh = np.array([[-0.40, 0], 
-                       [0, 0.06, 0.07, 0.13, 0.14, 0.20], 
-                       [-0.25, 0], 
-                       [0, 0.10], 
-                       [0, 0.10], 
-                        [0, 0.10],
-                        [0, 0.15],
-                        [0.08, 0.12, 0.20],
-                        [0, 0.10, 0.20],
-                        [0, 0.10, 0.20],
-                        [0, 0.10, 0.20],
-                        [0, 0.10, 0.20],
-                        [0, 0.06, 0.07, 0.13, 0.14, 0.20],
-                        [0, 0.06, 0.07, 0.13, 0.14, 0.20]],dtype=object)
+#         bsh = np.array([[-0.40, 0], 
+#                        [0, 0.06, 0.07, 0.13, 0.14, 0.20], 
+#                        [-0.25, 0], 
+#                        [0, 0.10], 
+#                        [0, 0.10], 
+#                         [0, 0.10],
+#                         [0, 0.15],
+#                         [0.08, 0.12, 0.20],
+#                         [0, 0.10, 0.20],
+#                         [0, 0.10, 0.20],
+#                         [0, 0.10, 0.20],
+#                         [0, 0.10, 0.20],
+#                         [0, 0.06, 0.07, 0.13, 0.14, 0.20],
+#                         [0, 0.06, 0.07, 0.13, 0.14, 0.20]],dtype=object)
         
               
 
@@ -1906,7 +1907,7 @@ def discreto_tap(grupo,n_tap,n_vgen,n_bshunt,sep):
     
     b = grupo[n_vgen:n_vgen+n_tap]
     
-    ref = np.arange(start = 0.9, stop = 1.1, step = 0.02)
+    ref = np.arange(start = 0.9, stop = 1.1, step = 0.01)
     
     discretizatap = np.zeros(len(b))
     
@@ -6167,5 +6168,8 @@ def otimizacao_pso_discreto_sengi(sep, zeta, psi, sigma, omega, max_iter, n_part
                        
             
     return j,perdas,pen_v,pen_gq,pen_tap,pen_bsh,global_best, tempo
+
+
+
 
 
